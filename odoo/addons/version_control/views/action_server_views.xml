@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_action_server_form_view_ext" model="ir.ui.view">
+        <field name="name">view.action.server.form.view.ext</field>
+        <field name="model">ir.actions.server</field>
+        <field name="inherit_id" ref="base.view_server_action_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Version control" name="version_control">
+                    <group>
+                        <button name="%(version_control.action_version_control_wizard)d" 
+                            type="action" colspan="2">Create version</button>
+                    </group>
+                    <group>
+                        <field name="version_control_line_ids" nolabel="1" colspan="2"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

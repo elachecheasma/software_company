@@ -1,0 +1,65 @@
+{
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.diagnosticMode": "workspace",
+  "sonarlint.connectedMode.project": {
+    "connectionId": "https-sonarqube-maherdev-com",
+    "projectKey": "maherDEV-IE_software-company-website_df176120-d9c9-473e-83cf-1f9261dce886"
+  },
+  "python.sortImports.args": [
+    "--profile",
+    "django"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.autopep8": "explicit",
+    "source.fixAll.sonarlint": "explicit",
+    "source.fixAll.markdownlint": "explicit"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true
+  },
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": ["--max-line-length", "120"],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker",
+    "editor.formatOnSave": true
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": true
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "davidanson.vscode-markdownlint",
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "*.conf": "nginx",
+    "*.dockerfile.j2": "jinja"
+  },
+  "emmet.includeLanguages": {
+    "jinja": "dockerfile"
+  },
+  "[jinja]": {
+    "editor.defaultFormatter": "samuelcolvin.jinjahtml",
+    "editor.formatOnSave": true
+  },
+  "editor.rulers": [120],
+}

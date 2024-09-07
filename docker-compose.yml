@@ -1,0 +1,86 @@
+services:
+  openssl:
+    image: maheramara/software-company-website_openssl:${TAG:-0.1.0-dev}
+    container_name: software-company-website_openssl
+    restart: on-failure
+    build:
+      context: ./openssl
+    volumes:
+      - odoo_ssl:/odoo/ssl/private/
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - .db:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+
+  odoo:
+    image: maheramara/software-company-website_odoo:${TAG:-0.1.0-dev}
+    build: ./odoo
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./odoo/addons:/mnt/extra-addons
+      - ./odoo/config:/etc/odoo
+      - odoo_ssl:/etc/ssl/private
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    depends_on:
+      db:
+        condition: service_healthy
+      openssl:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8069"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  api:
+    image: maheramara/software-company-website_api:${TAG:-0.1.0-dev}
+    container_name: api
+    build: ./api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app
+    entrypoint: ["./scripts/entrypoint.sh"]
+    user: "1000:1000"
+    depends_on:
+      db:
+        condition: service_healthy
+      odoo:
+        condition: service_healthy
+  
+  web:
+    image: maheramara/software-company-website_web:${TAG:-0.1.0-dev}
+    build: ./web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web/app:/app/app
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+volumes:
+  odoo_ssl:

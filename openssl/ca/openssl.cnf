@@ -1,0 +1,18 @@
+[req]
+prompt = no
+distinguished_name = maherdev
+
+[maherdev]
+C = TN
+ST = Sousse
+L = Sousse
+O = maherDEV
+OU = DevOps
+CN = maherdev.local
+
+[ssl_conf]
+system_default = system_default_sect
+
+[system_default_sect]
+MinProtocol = TLSv1.2
+CipherString = DEFAULT@SECLEVEL=2

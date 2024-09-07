@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_version_control_line_tree" model="ir.ui.view">
+        <field name="name">view.version.control.line.tree</field>
+        <field name="model">version.control.line</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="create_date" />
+                <field name="name" />
+                <field name="version_id" />
+                <field name="create_uid" />
+
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>

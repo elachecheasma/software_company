@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Resets */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#__next {
+  overflow-x: hidden;
+}
+
+@keyframes waterfall {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.waterfall-btn {
+  background-size: 200% 200%;
+  background-image: linear-gradient(to bottom right, #f97316, #ea580c, #c2410c, #9a3412);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.waterfall-btn:hover {
+  animation: waterfall 1.5s ease infinite;
+}
+
+.waterfall-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+  transform: scale(0);
+  transition: transform 0.5s ease-out;
+}
+
+.waterfall-btn:hover::before {
+  transform: scale(1);
+}
